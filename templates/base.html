@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}SueTube{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'site.css' %}">
+  </head>
+  <body>
+    <header class="nav">
+      <div class="container nav__inner">
+        <a class="logo" href="/">SueTube</a>
+        <div class="spacer"></div>
+        {% if user.is_authenticated %}
+          <span class="welcome">안녕하세요, {{ user.username }}님</span>
+          <a class="btn" href="/accounts/logout/">로그아웃</a>
+        {% else %}
+          <a class="btn" href="/accounts/login/">로그인</a>
+        {% endif %}
+      </div>
+    </header>
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="footer">
+      <div class="container">© SueTube</div>
+    </footer>
+  </body>
+  </html>
+

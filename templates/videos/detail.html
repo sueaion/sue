@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ video.title }} - SueTube{% endblock %}
+{% block content %}
+  <article class="player">
+    <video class="video" controls preload="metadata" {% if video.thumbnail %}poster="{{ video.thumbnail.url }}"{% endif %}>
+      <source src="{{ video.video_file.url }}" type="video/mp4" />
+      브라우저가 동영상을 지원하지 않습니다.
+    </video>
+    <h1 class="player__title">{{ video.title }}</h1>
+    {% if video.description %}
+      <p class="desc">{{ video.description }}</p>
+    {% endif %}
+    {% if video.is_private %}<div class="badge">비공개</div>{% endif %}
+  </article>
+{% endblock %}
+

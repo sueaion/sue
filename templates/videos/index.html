@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}홈 - SueTube{% endblock %}
+{% block content %}
+  <h1 class="page-title">동영상</h1>
+  <div class="grid">
+    {% for v in videos %}
+      <a class="card" href="{% url 'videos:detail' slug=v.slug %}">
+        {% if v.thumbnail %}
+          <img class="thumb" src="{{ v.thumbnail.url }}" alt="{{ v.title }}">
+        {% else %}
+          <div class="thumb thumb--placeholder">{{ v.title|truncatechars:24 }}</div>
+        {% endif %}
+        <div class="meta">
+          <div class="title">{{ v.title }}</div>
+          {% if v.is_private %}<div class="badge">비공개</div>{% endif %}
+        </div>
+      </a>
+    {% empty %}
+      <p>표시할 동영상이 없습니다.</p>
+    {% endfor %}
+  </div>
+{% endblock %}
+
